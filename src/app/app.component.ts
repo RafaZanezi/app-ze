@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SearchService } from './services/search.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,26 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app-ze';
+
+  constructor(private searchService: SearchService) {}
+
+  teste() {
+    this.searchService.distributorSearch().subscribe(res => {
+      console.log(res);
+    });
+  }
+
+  teste2() {
+    this.searchService.productSearch(532).subscribe(res => {
+      console.log(res);
+    });
+  }
+
+  teste3() {
+    this.searchService.categorySearch().subscribe(res => {
+      console.log(res);
+    });
+  }
+
+
 }
