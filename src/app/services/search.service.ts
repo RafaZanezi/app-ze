@@ -7,13 +7,13 @@ import * as responseConfig from '../model/response-config';
 })
 export class SearchService {
 
-  url: string
+  url: string;
 
   constructor(private http: HttpClient) {
     this.url = 'https://api.code-challenge.ze.delivery/public/graphql';
   }
 
-  distributorSearch() {
+  distributorSearch(lat: number, long: number) {
     return this.http.post(this.url,
       {
         operationName: 'pocSearchMethod',

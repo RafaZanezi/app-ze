@@ -12,7 +12,7 @@ export class AppComponent {
   constructor(private searchService: SearchService) {}
 
   teste() {
-    this.searchService.distributorSearch().subscribe(res => {
+    this.searchService.distributorSearch(1, 2).subscribe(res => {
       console.log(res);
     });
   }
