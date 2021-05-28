@@ -1,1 +1,11 @@
 <p>products works!</p>
+
+<div *ngFor="let product of productsList">
+    <label>{{ product.title }}</label>
+    <div *ngFor="let images of product.images">
+
+        <img [src]="images.url" alt="product.title" width="250" height="300">
+
+
+    </div>
+</div>

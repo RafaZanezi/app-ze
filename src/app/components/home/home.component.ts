@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { LocationService } from 'src/app/services/location.service';
 import { SearchService } from 'src/app/services/search.service';
@@ -9,14 +10,16 @@ import { SearchService } from 'src/app/services/search.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
-
+export class HomeComponent {
   address: FormControl;
   addressList: any; // change type - create model 
+  distributorId: any;
+  loading: boolean = false;
 
   constructor(
     private locationService: LocationService,
     private searchService: SearchService,
+    private router: Router
   ) {
     this.address = new FormControl('');
 
@@ -26,22 +29,22 @@ export class HomeComponent implements OnInit {
     ).subscribe(address => this.searchAddress(address));
   }
 
-  ngOnInit(): void {
-  }
+  searchDistributor(lat: string, long: string) {
+    localStorage.setItem('sessionLatitude', lat);
+    localStorage.setItem('sessionLongitude', long);
 
-
-  searchDistributor(lat: number, long: number) {
-    this.searchService.distributorSearch(lat, long).subscribe(res => {
-      console.log(res);
+    this.searchService.distributorSearch(lat, long).subscribe((response: any) => {
+      this.distributorId = response.data.pocSearch[0].id;
+      if (this.distributorId) {
+        this.router.navigate([this.distributorId, 'products']);
+      }
     });
   }
 
-  private searchAddress(address: string) {
-    if(address) {
-      this.locationService.search(address).subscribe((resultSet: any) => {
-        console.log(resultSet);
-        this.addressList = resultSet.results;
-      });
+  searchAddress(address: string) {
+    if (address) {
+      this.locationService.search(address)
+        .subscribe((resultSet: any) => this.addressList = resultSet.results);
     }
   }
 

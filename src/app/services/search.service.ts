@@ -13,7 +13,7 @@ export class SearchService {
     this.url = 'https://api.code-challenge.ze.delivery/public/graphql';
   }
 
-  distributorSearch(lat: number, long: number) {
+  distributorSearch(lat: string, long: string) {
     return this.http.post(this.url,
       {
         operationName: 'pocSearchMethod',
@@ -27,7 +27,7 @@ export class SearchService {
       });
   }
 
-  productSearch(distributorId: number, searchParams?: string, categoryId?: number) {
+  productSearch(distributorId: number, searchParams?: string, categoryId?: string | null) {
     return this.http.post(this.url,
       {
         operationName: 'poc',
@@ -40,11 +40,17 @@ export class SearchService {
       });
   }
 
-  categorySearch() {
+  categorySearch(lat: string, long: string) {
     return this.http.post(this.url,
       {
         operationName: 'allCategoriesSearch',
-        query: responseConfig.category
+        query: responseConfig.category,
+        variables: {
+          algorithm: "NEAREST",
+          lat: "-23.632919",
+          long: "-46.699453",
+          now: "2017-08-01T20:00:00.000Z"
+        }        
       });
   }
 
