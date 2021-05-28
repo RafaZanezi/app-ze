@@ -1,6 +1,10 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs/internal/observable/of';
+import { SearchService } from 'src/app/services/search.service';
 import { ProductsComponent } from './products.component';
+
 
 describe('ProductsComponent', () => {
   let component: ProductsComponent;
@@ -8,7 +12,11 @@ describe('ProductsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProductsComponent ]
+      declarations: [ ProductsComponent ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      providers: [
+        { provide: SearchService, useValue: { distributorSearch: () => { return of({}) } } },
+      ]
     })
     .compileComponents();
   });
@@ -16,7 +24,7 @@ describe('ProductsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductsComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    // fixture.detectChanges();
   });
 
   it('should create', () => {
