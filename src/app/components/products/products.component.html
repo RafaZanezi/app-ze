@@ -1,0 +1,37 @@
+<div *ngIf="loading" class="loading">
+    Carregando...
+</div>
+
+<section>
+    <div class="category-container">
+        <div *ngFor="let category of categoryList" class="card category" (click)="searchProduct(category.id)">
+            <div class="card-description">
+                <p>{{ category.title }}</p>
+            </div>
+        </div>
+    </div>
+
+    <h3>Todos os produtos</h3>
+    <div class="cards-container">
+        <div *ngFor="let product of productsList" class="card">
+            <div class="card-description">
+                <img [src]="product.images[0].url" alt="product.title" width="125" height="150">
+                <p>{{ product.title }}</p>
+                <strong>{{ product.productVariants[0].price | currency }}</strong>
+
+                <div class="actions">
+                    <button (click)="remove(product.id)">-</button>
+                    <input value="{{product.quantity}}">
+                    <button (click)="add(product.id)">+</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<footer class="footer">
+    <p>Baseado no layout e cores de https://ze.delivery</p>
+    <p>Todos os direitos reservados a <strong>ZX COMMERCE COMERCIO DE BEBIDAS LTDA</strong></p>
+</footer>

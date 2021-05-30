@@ -1,0 +1,29 @@
+body {
+    font-family: Roboto;
+    margin: 0px;
+}
+
+span.material-icons-outlined, span.material-icons {
+    color: gray;
+}
+
+.header, .footer{
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+}
+
+.loading { 
+    background-color: black;
+    opacity: 0.7;
+    color: #FFC500;
+    position: absolute;
+    height: 120%;
+    width: 100%;
+    padding-bottom: 50px;
+    z-index: 1;
+    text-align: center;
+    padding-top: 30px;
+    font-size: 36px;
+    cursor: progress;
+}
