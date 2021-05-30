@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    font-family: Roboto;
+    margin: 0px;
+}
+
+span.material-icons-outlined, span.material-icons {
+    color: gray;
+}
+
+.header, .footer{
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

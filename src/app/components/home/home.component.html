@@ -1,17 +1,38 @@
-<header></header>
+<header class="header">
+    <img width="121" height="40"
+        src="https://courier-images-web.imgix.net/static/img/white-logo.png?auto=compress,format&amp;fit=max&amp;w=undefined&amp;h=undefined&amp;dpr=2&amp;fm=png"
+        alt="Zé delivery logo" class="css-0">
+</header>
+
+<div *ngIf="loading" class="loading">
+    Carregando...
+</div>
+
 <section>
-    <p>home works!</p>
+    <div class="body margin-auto">
+        <p class="address-input input-title">Bebidas geladas a preço de mercado na sua casa agora</p>
 
-    <label>
-        Insira o endereço de entrega
-        <input type="text" [formControl]="address">
-    </label>
+        <label class="address-input label margin-auto">
+            <span class="material-icons-outlined">room</span>
+            <input type="text" placeholder="Insira o endereço de entrega" [formControl]="address">
+        </label>
 
-    <div *ngFor="let ads of addressList">
-        <button (click)="searchDistributor(ads.position.lat, ads.position.lon)">
-            <label>{{ads.address.streetName}} - {{ads.address.streetNumber}}, {{ads.address.municipality}} - {{ ads.address.countrySubdivision}} </label>
-        </button>
+        <div *ngIf="addressList && addressList.length > 0" class="address-list margin-auto">
+            <button title="Estou aqui!" *ngFor="let ads of addressList" class="margin-auto"
+                (click)="searchDistributor(ads.position.lat, ads.position.lon)">
+                <span class="material-icons-outlined">room</span>
+                <div class="display-block margin-auto">
+                    <p>{{ads.address.streetName}}</p>
+                    <label>{{ads.address.freeformAddress}}, {{ads.address.municipality}} - {{
+                        ads.address.countrySubdivision}} </label>
+                </div>
+            </button>
+        </div>
     </div>
 
 </section>
-<footer></footer>
+
+<footer class="footer">
+    <p>Baseado no layout e cores de https://ze.delivery</p>
+    <p>Todos os direitos reservados a <strong>ZX COMMERCE COMERCIO DE BEBIDAS LTDA</strong></p>
+</footer>

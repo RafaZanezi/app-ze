@@ -12,7 +12,7 @@ export class LocationService {
   language = 'pt-BR';
   countrySet = 'BR';
   
-  limit = 5;
+  limit = 4;
   lat = 15;
   lon = 47;
 

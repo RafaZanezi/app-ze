@@ -30,6 +30,7 @@ export class HomeComponent {
   }
 
   searchDistributor(lat: string, long: string) {
+    this.loading = true;
     localStorage.setItem('sessionLatitude', lat);
     localStorage.setItem('sessionLongitude', long);
 
@@ -38,13 +39,17 @@ export class HomeComponent {
       if (this.distributorId) {
         this.router.navigate([this.distributorId, 'products']);
       }
-    });
+    }, () => {
+      // error 
+    }, () => this.loading = false);
   }
 
   searchAddress(address: string) {
     if (address) {
       this.locationService.search(address)
         .subscribe((resultSet: any) => this.addressList = resultSet.results);
+    } else {
+      this.addressList = [];
     }
   }
 
